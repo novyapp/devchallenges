@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Button from "../components/Button";
 
-const Home: NextPage = () => {
+const ButtonPage: NextPage = () => {
   return (
     <>
       <Head>
@@ -73,4 +73,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default ButtonPage;

@@ -11,7 +11,7 @@ type Props = {
   startIcon?: string;
 };
 
-const Button = ({
+function Button({
   size,
   color = "default",
   variant,
@@ -19,7 +19,7 @@ const Button = ({
   disabled,
   disableShadow,
   startIcon,
-}: Props) => {
+}: Props): JSX.Element {
   const defaultColor = `hover:bg-[#AEAEAE] bg-[#E0E0E0] disabled:hover:bg-[#E0E0E0]`;
   const primaryColor = `hover:bg-[#0039CB] bg-[#2962FF] text-white`;
   const secondaryColor = `hover:bg-[#1C313A] bg-[#455A64] text-white`;
@@ -31,8 +31,6 @@ const Button = ({
 
   const outline = `border-2 border-[#3D5AFE] text-[#3D5AFE] bg-transparent hover:bg-[#2962FF]/10 shadow-white`;
   const text = `text-[#3D5AFE] bg-transparent hover:bg-[#2962FF]/10  disabled:hover:bg-white shadow-white`;
-
-  const startIco = <MdOutlineLocalGroceryStore />;
 
   return (
     <button
@@ -62,6 +60,6 @@ const Button = ({
       {children}
     </button>
   );
-};
+}
 
 export default Button;
