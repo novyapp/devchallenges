@@ -77,10 +77,10 @@ const Home: NextPage = () => {
                 }}
               >
                 <div className="border-r border-zinc-200 p-2 py-3 cursor-pointer text-[#333333]">
-                  Helsinci, Finland
+                  {cityFilter}, Finland
                 </div>
                 <div className="border-r border-zinc-200 p-2 py-3 cursor-pointer text-[#BDBDBD]">
-                  Add quests
+                  {totalGuests === 0 ? "Add quests" : totalGuests + " quests"}
                 </div>
                 <div className="text-xl p-2 py-3 text-[#EB5757]">
                   <AiOutlineSearch />
@@ -90,6 +90,14 @@ const Home: NextPage = () => {
           )}
           {menu && (
             <div className="border shadow-md rounded-md flex flex-row text-xs mt-2 w-full">
+              <div
+                onClick={() => {
+                  setMenu(!menu);
+                }}
+                className="border-r border-zinc-200 p-2 py-3 text-[#333333] relative w-12 font-semibold text-xl items-center justify-center flex cursor-pointer"
+              >
+                X
+              </div>
               <div className="border-r border-zinc-200 p-2 py-3 text-[#333333] relative w-64">
                 <div className="w-full">
                   <span className="uppercase text-xs text-zinc-900 font-semibold pl-3 ">
@@ -170,13 +178,17 @@ const Home: NextPage = () => {
                   </div>
                 )}
               </div>
-              <div className="text-xl p-2 py-3 text-[#EB5757]">
+              <div className="text-xl text-white px-4 py-3 bg-[#EB5757] ml-auto flex items-center flex-row space-x-4 rounded-md">
                 <AiOutlineSearch />
+                <span>Search</span>
               </div>
             </div>
           )}
         </div>
-
+        <div className="flex flow-row mt-8">
+          <span className="text-xl font-semibold">Stays in Finland</span>
+          <span className="ml-auto">{placesFilter.length} stays</span>
+        </div>
         <main className="mx-auto flex flex-row flex-wrap items-center justify-start p-4">
           {placesFilter.map((place, index) => (
             <Place key={index} place={place} />
