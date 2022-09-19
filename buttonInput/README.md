@@ -54,4 +54,4 @@ This application/site was created as a submission to a [DevChallenges](https://d
 ## Contact
 
 - Website [novyapp.com](https://{novyapp.com})
-- GitHub [@your-username](https://{github.com/novyapp})
+- GitHub [@novyapp](https://{github.com/novyapp})

@@ -45,7 +45,7 @@ const Home: NextPage = () => {
   );
   console.log(placesFilter);
 
-  let uniqueCities: string[] = [];
+  const uniqueCities: string[] = [];
   data.forEach(({ city }) => {
     if (!uniqueCities.includes(city)) {
       uniqueCities.push(city);
@@ -108,7 +108,9 @@ const Home: NextPage = () => {
                     onClick={handleCity}
                   >
                     {uniqueCities.map((city) => (
-                      <option className="p-4">{city}, Finland</option>
+                      <option key={city} className="p-4">
+                        {city}, Finland
+                      </option>
                     ))}
                   </select>
                 </div>
