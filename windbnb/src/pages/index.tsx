@@ -9,28 +9,28 @@ import { useState, useEffect } from "react";
 const Home: NextPage = () => {
   const [menu, setMenu] = useState(false);
 
-  const [cityFilter, setCityFilter] = useState();
+  const [cityFilter, setCityFilter] = useState("");
 
   const [guests, setGuests] = useState({ child: 0, adults: 0 });
   const [guestsMenu, setguestsMenu] = useState(false);
 
-  const handleCity = (e) => {
+  const handleCity = (e: React.MouseEvent<HTMLSelectElement>) => {
     e.preventDefault();
-    setCityFilter(e.target.value.split(",").slice(0, 1).join(""));
+    setCityFilter(e.currentTarget.value.split(",").slice(0, 1).join(""));
   };
-  const handlePlusChild = (e) => {
+  const handlePlusChild = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setGuests({ ...guests, child: guests.child + 1 });
   };
-  const handleMinusChild = (e) => {
+  const handleMinusChild = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (guests.child >= 1) setGuests({ ...guests, child: guests.child - 1 });
   };
-  const handlePlusAdult = (e) => {
+  const handlePlusAdult = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setGuests({ ...guests, adults: guests.adults + 1 });
   };
-  const handleMinusAdult = (e) => {
+  const handleMinusAdult = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (guests.adults >= 1) setGuests({ ...guests, adults: guests.adults - 1 });
   };
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
   });
 
   useEffect(() => {
-    setCityFilter(uniqueCities[0]);
+    setCityFilter(uniqueCities[0]!);
   }, []);
 
   console.log(cityFilter);
