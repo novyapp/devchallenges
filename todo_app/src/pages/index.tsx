@@ -78,13 +78,24 @@ function TodoForm({ addTodo }: any) {
 }
 
 const Home: NextPage = () => {
+  const [loading, setLoading] = useState(true);
   const [todos, setTodos] = useState(initialData);
   const [tabs, setTabs] = useState("all");
 
   const completedTasks = todos.filter((todo) => todo.isCompleted === true);
   const activeTasks = todos.filter((todo) => todo.isCompleted === false);
 
-  console.log(todos);
+  useEffect(() => {
+    // Perform localStorage action
+    const item = localStorage.getItem("todos");
+    if (item && loading) {
+      setTodos(JSON.parse(item));
+      setLoading(false);
+    }
+  }, []);
+  useEffect(() => {
+    if (!loading) localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (
     text: string,
@@ -103,11 +114,13 @@ const Home: NextPage = () => {
 
     setTodos(copyCompleted);
   };
-  const removeTodo = (index: number) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const removeTodo = (idToDelete: number) => {
+    console.log(idToDelete);
+    setTodos((currentTodos) =>
+      currentTodos.filter((todo) => todo.id !== idToDelete)
+    );
   };
+
   const removeAllCompleted = () => {
     setTodos(activeTasks);
   };
