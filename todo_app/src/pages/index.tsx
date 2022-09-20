@@ -20,10 +20,6 @@ type AppProps = {
   completeTodo: (index: number) => void;
 };
 
-type AppProp = {
-  addTodo: (todo: { id: number; isCompleted: boolean; text: string }) => void;
-};
-
 function Todo({ todo, index, completeTodo, removeTodo }: AppProps) {
   return (
     <div className="bg-white border border-zinc-100 p-2 hover:bg-zinc-100 flex  justify-start">
@@ -92,16 +88,12 @@ const Home: NextPage = () => {
       setTodos(JSON.parse(item));
       setLoading(false);
     }
-  }, []);
+  }, [loading]);
   useEffect(() => {
     if (!loading) localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  }, [todos, loading]);
 
-  const addTodo = (
-    text: string,
-    id = Date.now(),
-    isCompleted: boolean = false
-  ) => {
+  const addTodo = (text: string, id = Date.now(), isCompleted = false) => {
     const newTodos = [...todos, { id, text, isCompleted }];
     setTodos(newTodos);
   };
@@ -169,7 +161,7 @@ const Home: NextPage = () => {
         <TodoForm addTodo={addTodo} />
         <div>
           <div className={`${tabs === "all" ? "block" : "hidden"}`}>
-            {todos.map((todo, index) => (
+            {todos.map((todo) => (
               <Todo
                 key={todo.id}
                 index={todo.id}
@@ -182,7 +174,7 @@ const Home: NextPage = () => {
           <div className={`${tabs === "active" ? "block" : "hidden"}`}>
             {todos
               .filter((todo) => todo.isCompleted === false)
-              .map((todo, index) => (
+              .map((todo) => (
                 <Todo
                   key={todo.id}
                   index={todo.id}
@@ -199,7 +191,7 @@ const Home: NextPage = () => {
           >
             {todos
               .filter((todo) => todo.isCompleted === true)
-              .map((todo, index) => (
+              .map((todo) => (
                 <Todo
                   key={todo.id}
                   index={todo.id}
